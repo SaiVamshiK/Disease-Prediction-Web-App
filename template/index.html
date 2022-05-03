@@ -2,7 +2,7 @@
 
 {% block content%}
 
-    <h2>Uplaod Image for Classification</h2>
+    <h2>Upload Image for Classification</h2>
 
     
     <br>
@@ -15,8 +15,15 @@
 
  
  <input type="submit" value="Submit" ></div>
-<br>
- <img src={{filePathName}} alt='imagename'>
+<div style="margin-top: 100px; margin-left: 400px;">
+    <img src={{filePathName}} alt='imagename'>
+ {% if prediction%}
+ <h3>
+    Prediction : {{prediction}}
+</h3>
+{% endif %}
+</div>
+ 
 
 </form>
 <br>

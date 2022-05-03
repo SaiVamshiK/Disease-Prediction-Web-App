@@ -3,6 +3,7 @@ from django.core.files.storage import FileSystemStorage
 # Create your views here.
 from keras.models import load_model
 from keras.preprocessing import image
+from keras.preprocessing.image import load_img, img_to_array
 import tensorflow as tf
 import pickle
 import numpy as np
@@ -20,8 +21,9 @@ def predictImage(request):
     testimage='.'+filePathName
     print("TEST IMAGE:"+testimage)
     img = image.load_img(testimage, target_size=(img_height, img_width))
-    new_model = tf.keras.models.load_model('./models/25.h5')
+    new_model = tf.keras.models.load_model('./models/final_model.h5')
     #MobileNetModelImagenet.h5
+    img = img_to_array(img)
     samples_to_predict = []
     samples_to_predict.append(img)
     samples_to_predict = np.array(samples_to_predict)
@@ -39,6 +41,6 @@ def predictImage(request):
         if maxSoFar < predictions[0][i]:
             maxSoFar = predictions[0][i]
             index = i
-
+    print("prediction : ", class_to_label[index])
     return render(request,"index.html",{'filePathName':filePathName,'prediction':class_to_label[index]})
 
