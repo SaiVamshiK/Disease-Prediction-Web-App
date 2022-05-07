@@ -24,6 +24,7 @@ def predictImage(request):
     new_model = tf.keras.models.load_model('./models/final_model.h5')
     #MobileNetModelImagenet.h5
     img = img_to_array(img)
+    print("ewahbehb>>>>>", img.shape)
     samples_to_predict = []
     samples_to_predict.append(img)
     samples_to_predict = np.array(samples_to_predict)
@@ -42,5 +43,7 @@ def predictImage(request):
             maxSoFar = predictions[0][i]
             index = i
     print("prediction : ", class_to_label[index])
+    print("TEST IMAGE:", testimage)
+    print("shape : ", img.shape)
     return render(request,"index.html",{'filePathName':filePathName,'prediction':class_to_label[index]})
 
